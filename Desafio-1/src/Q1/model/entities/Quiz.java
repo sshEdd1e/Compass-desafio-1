@@ -1,8 +1,11 @@
 package Q1.model.entities;
 
+import Q1.model.exceptions.DomainException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.zip.DataFormatException;
 
 public class Quiz {
     private List<String> perguntas = new ArrayList<>();
@@ -39,17 +42,19 @@ public class Quiz {
         }
     }
 
-    public int questiona(){
+    public int questiona(int i){
         Scanner sc = new Scanner(System.in);
         int cont = 0;
-        for (int i = 0; i < perguntas.size(); i++) {
-            printaPergunta(i);
-            if (Character.toLowerCase(respostasCertas.get(i)) == Character.toLowerCase(sc.next().charAt(0))) {
-                System.out.println("\nRespota correta!\n");
-                cont++;
-            } else {
-                System.out.println("\nRespota errada!\n");
-            }
+        char resp;
+        printaPergunta(i);
+        resp = sc.next().charAt(0);
+        if (Character.toLowerCase(respostasCertas.get(i)) == Character.toLowerCase(resp)) {
+            System.out.println("\nRespota correta!\n");
+            cont++;
+        } else if (resp < Character.toLowerCase(respostasCertas.get(i)) || resp > Character.toLowerCase(respostasCertas.get(i))) {
+            throw new DomainException("Opção inválida!");
+        }else {
+            System.out.println("\nRespota errada!\n");
         }
         return cont;
     }

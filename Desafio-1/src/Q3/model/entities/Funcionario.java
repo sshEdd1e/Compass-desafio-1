@@ -1,5 +1,7 @@
 package Q3.model.entities;
 
+import Q1.model.exceptions.DomainException;
+
 public class Funcionario {
     private String nome;
     private double salario;
@@ -8,6 +10,12 @@ public class Funcionario {
     }
 
     public Funcionario(String nome, double salario) {
+        if (!(nome.contains(" "))){
+            throw new DomainException("Favor digite o nome completo!");
+        }
+        if (salario < 0){
+            throw new DomainException("Salario não pode ser negativo!");
+        }
         this.nome = nome;
         this.salario = salario;
     }
@@ -17,6 +25,9 @@ public class Funcionario {
     }
 
     public void setNome(String nome) {
+        if (!(nome.contains(" "))){
+            throw new DomainException("Favor digite o nome completo!");
+        }
         this.nome = nome;
     }
 
@@ -25,6 +36,9 @@ public class Funcionario {
     }
 
     public void setSalario(double salario) {
+        if (salario < 0){
+            throw new DomainException("Salario não pode ser negativo!");
+        }
         this.salario = salario;
     }
 

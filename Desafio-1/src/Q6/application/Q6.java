@@ -11,8 +11,11 @@ public class Q6 {
         prod.compraProduto(50);
 
         System.out.println(prod);
-
-        prod.vendeProduto(42);
+        try {
+            prod.vendeProduto(42);
+        } catch (RuntimeException e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
 
         System.out.println(prod);
     }

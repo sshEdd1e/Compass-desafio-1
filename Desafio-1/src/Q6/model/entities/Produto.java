@@ -1,5 +1,7 @@
 package Q6.model.entities;
 
+import Q3.model.exceptions.DomainException;
+
 public class Produto {
     private String nome;
     private int codigo;
@@ -21,9 +23,10 @@ public class Produto {
     }
 
     public void vendeProduto(int quant){
-        if (quant <= quantidadeEstoque){
-            quantidadeEstoque -= quant;
+        if (quant > quantidadeEstoque){
+            throw new DomainException("Produto indisponível!")
         }
+        quantidadeEstoque -= quant;
     }
 
     @Override
